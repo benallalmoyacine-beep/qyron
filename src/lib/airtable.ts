@@ -118,3 +118,27 @@ export async function getFraisLivraison(): Promise<FraisLivraison[]> {
     bureau: (r.fields.TarifBureau as number) ?? 0,
   }));
 }
+
+export type Bloc = {
+  titre: string;
+  texte: string;
+  ordre: number;
+};
+
+/** Blocs de texte libre de la table Contenu, filtrés par page. */
+export async function getContenu(page: string): Promise<Bloc[]> {
+  const records = await listRecords(
+    env("AIRTABLE_TABLE_CONTENU", "Contenu"),
+    new URLSearchParams(),
+    300,
+  );
+
+  return records
+    .filter((r) => (r.fields.Page as string) === page)
+    .map((r) => ({
+      titre: (r.fields.Titre as string) ?? "",
+      texte: (r.fields.Texte as string) ?? "",
+      ordre: typeof r.fields.Ordre === "number" ? r.fields.Ordre : Infinity,
+    }))
+    .sort((a, b) => a.ordre - b.ordre);
+}

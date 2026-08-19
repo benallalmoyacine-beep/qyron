@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  /* Noir profond, blanc os, orange filament en fusion. */
-  --color-void: #08080b;
-  --color-panel: #101016;
-  --color-tile: #1a1a22;
-  --color-ink: #f4f1ea;
-  --color-dim: #8f8d88;
+  /* Bleu nuit profond, blanc os, orange filament en fusion. */
+  --color-void: #080d1a;
+  --color-panel: #0f1626;
+  --color-tile: #182236;
+  --color-ink: #f1f3f8;
+  --color-dim: #8d97ad;
   --color-heat: #ff5a1f;
-  --color-line: #26262f;
+  --color-glow: #3d6fd4;
+  --color-line: #232f47;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-anton), "Arial Narrow", ui-sans-serif, sans-serif;

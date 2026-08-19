@@ -1,6 +1,6 @@
 import { getFraisLivraison, getProduits, type Produit } from "@/lib/airtable";
 import Bandeau from "@/components/Bandeau";
-import ProductCard from "@/components/ProductCard";
+import Catalogue from "@/components/Catalogue";
 
 // Rendu à la demande : le catalogue n'est jamais lu pendant le build, donc un
 // déploiement aboutit même si Airtable est indisponible ou mal configuré.
@@ -52,19 +52,12 @@ export default async function Accueil() {
           Impression 3D — Algérie
         </p>
         <h1 className="display mt-6 text-[clamp(3rem,13vw,11rem)]">Le catalogue</h1>
-        <p className="chiffres tag mt-6 text-dim">
-          {String(produits.length).padStart(2, "0")} pièces disponibles à la commande
-        </p>
       </section>
 
       <Bandeau />
 
       <section className="mx-auto max-w-[100rem] px-5 py-16 sm:px-8 sm:py-24">
-        <div className="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
-          {produits.map((produit, i) => (
-            <ProductCard key={produit.id} produit={produit} index={i + 1} />
-          ))}
-        </div>
+        <Catalogue produits={produits} />
       </section>
 
       <section className="relative overflow-hidden border-t border-line bg-panel/70">

@@ -11,18 +11,24 @@ type Carre = {
   opacite: number;
   duree: number;
   retard: number;
-  chaud?: boolean;
+  teinte: "chaud" | "bleu" | "clair";
 };
 
+const TEINTES = {
+  chaud: "var(--color-heat)",
+  bleu: "var(--color-glow)",
+  clair: "var(--color-ink)",
+} as const;
+
 const CARRES: Carre[] = [
-  { gauche: 6, haut: 8, taille: 220, rotation: 18, flou: 44, opacite: 0.16, duree: 34, retard: 0, chaud: true },
-  { gauche: 72, haut: 4, taille: 160, rotation: -12, flou: 30, opacite: 0.1, duree: 42, retard: -6 },
-  { gauche: 38, haut: 26, taille: 300, rotation: 32, flou: 70, opacite: 0.09, duree: 52, retard: -14 },
-  { gauche: 84, haut: 34, taille: 130, rotation: 44, flou: 26, opacite: 0.14, duree: 38, retard: -22, chaud: true },
-  { gauche: 12, haut: 48, taille: 190, rotation: -26, flou: 52, opacite: 0.08, duree: 46, retard: -9 },
-  { gauche: 60, haut: 62, taille: 260, rotation: 8, flou: 60, opacite: 0.12, duree: 58, retard: -30, chaud: true },
-  { gauche: 26, haut: 76, taille: 150, rotation: -38, flou: 34, opacite: 0.1, duree: 40, retard: -17 },
-  { gauche: 88, haut: 84, taille: 200, rotation: 22, flou: 48, opacite: 0.09, duree: 50, retard: -25 },
+  { gauche: 6, haut: 8, taille: 220, rotation: 18, flou: 44, opacite: 0.16, duree: 34, retard: 0, teinte: "chaud" },
+  { gauche: 72, haut: 4, taille: 160, rotation: -12, flou: 30, opacite: 0.22, duree: 42, retard: -6, teinte: "bleu" },
+  { gauche: 38, haut: 26, taille: 300, rotation: 32, flou: 70, opacite: 0.2, duree: 52, retard: -14, teinte: "bleu" },
+  { gauche: 84, haut: 34, taille: 130, rotation: 44, flou: 26, opacite: 0.14, duree: 38, retard: -22, teinte: "chaud" },
+  { gauche: 12, haut: 48, taille: 190, rotation: -26, flou: 52, opacite: 0.08, duree: 46, retard: -9, teinte: "clair" },
+  { gauche: 60, haut: 62, taille: 260, rotation: 8, flou: 60, opacite: 0.12, duree: 58, retard: -30, teinte: "chaud" },
+  { gauche: 26, haut: 76, taille: 150, rotation: -38, flou: 34, opacite: 0.24, duree: 40, retard: -17, teinte: "bleu" },
+  { gauche: 88, haut: 84, taille: 200, rotation: 22, flou: 48, opacite: 0.09, duree: 50, retard: -25, teinte: "clair" },
 ];
 
 const ECLATS = [
@@ -69,7 +75,7 @@ export default function Fond() {
             rotate: `${c.rotation}deg`,
             filter: `blur(${c.flou}px)`,
             opacity: c.opacite,
-            background: c.chaud ? "var(--color-heat)" : "var(--color-ink)",
+            background: TEINTES[c.teinte],
             animationDuration: `${c.duree}s`,
             animationDelay: `${c.retard}s`,
           }}
