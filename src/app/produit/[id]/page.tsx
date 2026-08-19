@@ -23,10 +23,10 @@ export default async function FicheProduit({ params }: { params: Promise<{ id: s
   }
 
   return (
-    <article className="pt-4">
+    <article className="mx-auto max-w-[100rem] px-5 pb-32 pt-24 sm:px-8">
       <Link
         href="/"
-        className="tag inline-flex min-h-11 items-center gap-2 text-dim transition-opacity duration-200 hover:opacity-70"
+        className="tag inline-flex min-h-11 items-center gap-2 text-dim transition-colors duration-200 hover:text-heat"
       >
         <svg
           width="14"
@@ -39,15 +39,17 @@ export default async function FicheProduit({ params }: { params: Promise<{ id: s
           strokeLinejoin="round"
           aria-hidden="true"
         >
-          <path d="m15 18-6-6 6-6" />
+          <path d="M19 12H5M11 18l-6-6 6-6" />
         </svg>
-        Retour
+        Catalogue
       </Link>
 
-      <div className="mt-4 grid gap-8 md:grid-cols-[1.15fr_1fr] md:gap-12">
-        <div className="space-y-3">
+      <h1 className="display mt-6 text-[clamp(3rem,13vw,11rem)]">{produit.nom}</h1>
+
+      <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
+        <div className="space-y-4">
           {produit.photos.map((photo, i) => (
-            <div key={photo} className="relative aspect-square overflow-hidden rounded-sm bg-tile">
+            <div key={photo} className="relative aspect-[4/5] overflow-hidden rounded-sm bg-tile">
               <Image
                 src={photo}
                 alt={
@@ -56,36 +58,50 @@ export default async function FicheProduit({ params }: { params: Promise<{ id: s
                     : produit.nom
                 }
                 fill
-                sizes="(max-width: 768px) 100vw, 55vw"
+                sizes="(max-width: 1024px) 100vw, 60vw"
                 priority={i === 0}
                 className="object-cover"
               />
+              <span className="chiffres tag absolute left-3 top-3 text-ink/70">
+                {String(i + 1).padStart(2, "0")}
+              </span>
             </div>
           ))}
         </div>
 
-        <div className="md:sticky md:top-20 md:self-start">
-          <h1 className="display text-[clamp(2rem,7vw,3.25rem)]">{produit.nom}</h1>
-          <p className="chiffres display mt-3 text-2xl">{formatPrix(produit.prix)}</p>
-
-          {!produit.disponible && (
-            <p className="tag mt-4 inline-block bg-deep/85 px-2.5 py-1.5">Indisponible</p>
-          )}
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <p className="chiffres display text-[clamp(2.5rem,8vw,4.5rem)] text-heat">
+            {formatPrix(produit.prix)}
+          </p>
 
           {produit.description && (
             <p className="mt-6 whitespace-pre-line text-dim">{produit.description}</p>
           )}
 
-          <dl className="mt-8 border-t border-line/50">
+          <dl className="mt-10 border-t border-line">
             {produit.dimensions && (
-              <div className="flex items-baseline justify-between gap-6 border-b border-line/50 py-3">
+              <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
                 <dt className="tag text-dim">Dimensions</dt>
                 <dd className="chiffres">{produit.dimensions} cm</dd>
               </div>
             )}
-            <div className="flex items-baseline justify-between gap-6 border-b border-line/50 py-3">
+            <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
               <dt className="tag text-dim">Couleurs</dt>
               <dd className="text-right">Toutes les couleurs</dd>
+            </div>
+            <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
+              <dt className="tag text-dim">Statut</dt>
+              <dd className="flex items-center gap-2">
+                <span
+                  aria-hidden="true"
+                  className={`h-1.5 w-1.5 rounded-full ${produit.disponible ? "bg-heat" : "bg-dim"}`}
+                />
+                {produit.disponible ? "Disponible" : "Indisponible"}
+              </dd>
+            </div>
+            <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
+              <dt className="tag text-dim">Paiement</dt>
+              <dd className="text-right">À la livraison</dd>
             </div>
           </dl>
 

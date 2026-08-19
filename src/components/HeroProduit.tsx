@@ -5,70 +5,69 @@ import { formatPrix } from "@/lib/format";
 
 export default function HeroProduit({ produit }: { produit: Produit }) {
   return (
-    <section className="overflow-hidden rounded-lg bg-panel">
-      <div className="grid md:grid-cols-[1fr_1.15fr]">
-        <div className="order-2 flex flex-col justify-between gap-8 p-6 sm:p-8 md:order-1">
-          <div>
-            <p className="tag text-dim">[ Dernier modèle ]</p>
+    <section className="relative min-h-[100dvh] overflow-hidden pt-14">
+      {/* La photo occupe tout l'ecran, un voile la fait passer derriere le texte. */}
+      <div className="absolute inset-0">
+        {produit.photos[0] && (
+          <Image
+            src={produit.photos[0]}
+            alt={produit.nom}
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-void via-void/75 to-void/40" />
+      </div>
 
-            <h1 className="display mt-4 text-[clamp(2.5rem,9vw,4.5rem)]">{produit.nom}</h1>
+      <div className="relative mx-auto flex min-h-[calc(100dvh-3.5rem)] max-w-[100rem] flex-col justify-end px-5 pb-12 sm:px-8 sm:pb-16">
+        <p className="tag flex items-center gap-3 text-heat">
+          <span className="h-px w-10 bg-heat" aria-hidden="true" />
+          Dernier modèle
+        </p>
 
+        <h1 className="display mt-5 text-[clamp(3.5rem,17vw,15rem)]">{produit.nom}</h1>
+
+        <div className="mt-8 flex flex-wrap items-end justify-between gap-8 border-t border-line pt-6">
+          <dl className="flex flex-wrap gap-x-12 gap-y-4">
             {produit.dimensions && (
-              <dl className="mt-6 flex gap-8 border-t border-line/50 pt-4">
-                <div>
-                  <dt className="tag text-dim">Dimensions</dt>
-                  <dd className="chiffres mt-1">{produit.dimensions} cm</dd>
-                </div>
-                <div>
-                  <dt className="tag text-dim">Couleurs</dt>
-                  <dd className="mt-1">Toutes</dd>
-                </div>
-              </dl>
+              <div>
+                <dt className="tag text-dim">Dimensions</dt>
+                <dd className="chiffres mt-1.5 text-lg">{produit.dimensions} cm</dd>
+              </div>
             )}
-          </div>
+            <div>
+              <dt className="tag text-dim">Couleurs</dt>
+              <dd className="mt-1.5 text-lg">Toutes</dd>
+            </div>
+            <div>
+              <dt className="tag text-dim">Prix</dt>
+              <dd className="chiffres mt-1.5 text-lg text-heat">{formatPrix(produit.prix)}</dd>
+            </div>
+          </dl>
 
           <Link
             href={`/produit/${produit.id}`}
-            className="group inline-flex items-center gap-4 self-start"
+            className="group inline-flex min-h-14 items-center gap-4 rounded-full bg-ink py-3 pl-6 pr-3 text-void transition-colors duration-200 hover:bg-heat hover:text-ink"
           >
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-ink/60 transition-colors duration-200 group-hover:bg-ink group-hover:text-deep">
+            <span className="tag">Découvrir</span>
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-void/10 transition-transform duration-200 group-hover:translate-x-0.5">
               <svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="1.75"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
               >
-                <path d="M7 17 17 7M9 7h8v8" />
+                <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </span>
-            <span>
-              <span className="tag block text-dim">Voir le produit</span>
-              <span className="chiffres display block text-2xl">{formatPrix(produit.prix)}</span>
-            </span>
           </Link>
-        </div>
-
-        <div className="relative order-1 aspect-square bg-tile md:order-2 md:aspect-auto md:min-h-[26rem]">
-          {produit.photos[0] && (
-            <Image
-              src={produit.photos[0]}
-              alt={produit.nom}
-              fill
-              sizes="(max-width: 768px) 100vw, 60vw"
-              priority
-              className="object-cover"
-            />
-          )}
-          {!produit.disponible && (
-            <span className="tag absolute left-4 top-4 bg-deep/85 px-2.5 py-1.5 text-ink">
-              Indisponible
-            </span>
-          )}
         </div>
       </div>
     </section>
