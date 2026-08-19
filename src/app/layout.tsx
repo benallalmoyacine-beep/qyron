@@ -1,19 +1,31 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
 export const metadata: Metadata = {
-  title: "QYRON",
-  description: "Produits imprimés en 3D",
+  title: "QYRON — Impression 3D",
+  description: "Objets imprimés en 3D, fabriqués en Algérie.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
-      <body>
+    <html lang="fr" className={inter.variable}>
+      <body className="min-h-dvh">
         <Header />
-        <main className="mx-auto max-w-5xl px-4 py-6">{children}</main>
+        <main className="mx-auto max-w-6xl px-5 pb-24 pt-8 sm:px-8">{children}</main>
         <WhatsAppButton />
       </body>
     </html>

@@ -6,21 +6,29 @@ import ProductCard from "@/components/ProductCard";
 // Les réponses restent mises en cache 60 s (voir lib/airtable.ts).
 export const dynamic = "force-dynamic";
 
+function Message({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="py-24 text-center text-muted">
+      <p>{children}</p>
+    </div>
+  );
+}
+
 export default async function Accueil() {
   let produits: Produit[];
   try {
     produits = await getProduits();
   } catch (erreur) {
     console.error("Lecture du catalogue impossible", erreur);
-    return <p className="text-muted">Catalogue momentanément indisponible.</p>;
+    return <Message>Catalogue momentanément indisponible.</Message>;
   }
 
   if (produits.length === 0) {
-    return <p className="text-muted">Aucun produit pour le moment.</p>;
+    return <Message>Aucun produit pour le moment.</Message>;
   }
 
   return (
-    <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
+    <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4">
       {produits.map((produit) => (
         <ProductCard key={produit.id} produit={produit} />
       ))}
