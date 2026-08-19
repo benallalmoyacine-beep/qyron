@@ -23,77 +23,75 @@ export default async function FicheProduit({ params }: { params: Promise<{ id: s
   }
 
   return (
-    <article className="mx-auto max-w-2xl">
+    <article className="pt-4">
       <Link
         href="/"
-        className="inline-flex min-h-11 items-center gap-1.5 text-sm text-muted transition-opacity duration-200 hover:opacity-60"
+        className="tag inline-flex min-h-11 items-center gap-2 text-dim transition-opacity duration-200 hover:opacity-70"
       >
         <svg
-          width="16"
-          height="16"
+          width="14"
+          height="14"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.75"
+          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
         >
           <path d="m15 18-6-6 6-6" />
         </svg>
-        Tous les produits
+        Retour
       </Link>
 
-      <div className="mt-2 space-y-3">
-        {produit.photos.map((photo, i) => (
-          <div
-            key={photo}
-            className="relative aspect-square overflow-hidden rounded-2xl bg-surface ring-1 ring-line"
-          >
-            <Image
-              src={photo}
-              alt={
-                produit.photos.length > 1
-                  ? `${produit.nom} — vue ${i + 1} sur ${produit.photos.length}`
-                  : produit.nom
-              }
-              fill
-              sizes="(max-width: 768px) 100vw, 672px"
-              priority={i === 0}
-              className="object-cover"
-            />
-          </div>
-        ))}
-      </div>
-
-      <header className="mt-8">
-        <h1 className="text-2xl font-semibold leading-tight">{produit.nom}</h1>
-        <p className="chiffres mt-1.5 text-xl text-accent">{formatPrix(produit.prix)}</p>
-        {!produit.disponible && (
-          <p className="mt-2 inline-block rounded-full bg-ink/85 px-2.5 py-1 text-xs font-medium text-white">
-            Indisponible
-          </p>
-        )}
-      </header>
-
-      {produit.description && (
-        <p className="mt-6 whitespace-pre-line text-muted">{produit.description}</p>
-      )}
-
-      <dl className="mt-8 divide-y divide-line border-y border-line text-[15px]">
-        {produit.dimensions && (
-          <div className="flex justify-between gap-6 py-3">
-            <dt className="text-muted">Dimensions</dt>
-            <dd className="chiffres text-right">{produit.dimensions} cm</dd>
-          </div>
-        )}
-        <div className="flex justify-between gap-6 py-3">
-          <dt className="text-muted">Couleurs</dt>
-          <dd className="text-right">Toutes les couleurs sont disponibles</dd>
+      <div className="mt-4 grid gap-8 md:grid-cols-[1.15fr_1fr] md:gap-12">
+        <div className="space-y-3">
+          {produit.photos.map((photo, i) => (
+            <div key={photo} className="relative aspect-square overflow-hidden rounded-sm bg-tile">
+              <Image
+                src={photo}
+                alt={
+                  produit.photos.length > 1
+                    ? `${produit.nom} — vue ${i + 1} sur ${produit.photos.length}`
+                    : produit.nom
+                }
+                fill
+                sizes="(max-width: 768px) 100vw, 55vw"
+                priority={i === 0}
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
-      </dl>
 
-      <DetailsLivraison frais={frais} />
+        <div className="md:sticky md:top-20 md:self-start">
+          <h1 className="display text-[clamp(2rem,7vw,3.25rem)]">{produit.nom}</h1>
+          <p className="chiffres display mt-3 text-2xl">{formatPrix(produit.prix)}</p>
+
+          {!produit.disponible && (
+            <p className="tag mt-4 inline-block bg-deep/85 px-2.5 py-1.5">Indisponible</p>
+          )}
+
+          {produit.description && (
+            <p className="mt-6 whitespace-pre-line text-dim">{produit.description}</p>
+          )}
+
+          <dl className="mt-8 border-t border-line/50">
+            {produit.dimensions && (
+              <div className="flex items-baseline justify-between gap-6 border-b border-line/50 py-3">
+                <dt className="tag text-dim">Dimensions</dt>
+                <dd className="chiffres">{produit.dimensions} cm</dd>
+              </div>
+            )}
+            <div className="flex items-baseline justify-between gap-6 border-b border-line/50 py-3">
+              <dt className="tag text-dim">Couleurs</dt>
+              <dd className="text-right">Toutes les couleurs</dd>
+            </div>
+          </dl>
+
+          <DetailsLivraison frais={frais} />
+        </div>
+      </div>
     </article>
   );
 }

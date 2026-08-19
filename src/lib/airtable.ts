@@ -10,6 +10,7 @@ export type Produit = {
   photos: string[];
   dimensions: string;
   disponible: boolean;
+  vedette: boolean;
 };
 
 export type FraisLivraison = {
@@ -74,6 +75,7 @@ function toProduit(record: AirtableRecord): Produit {
     photos: photos.map((p) => p.thumbnails?.large?.url ?? p.url),
     dimensions: (f.Dimensions as string) ?? "",
     disponible: Boolean(f.Disponible),
+    vedette: Boolean(f.Vedette),
   };
 }
 
