@@ -18,18 +18,6 @@ export type FraisLivraison = {
   bureau: number;
 };
 
-export type NouvelleCommande = {
-  produits: string;
-  total: number;
-  fraisLivraison: number;
-  nom: string;
-  telephone: string;
-  wilaya: string;
-  commune: string;
-  adresse: string;
-  modeLivraison: "Domicile" | "Bureau";
-};
-
 type AirtableAttachment = { url: string; thumbnails?: { large?: { url: string } } };
 type AirtableRecord = { id: string; fields: Record<string, unknown> };
 
@@ -129,35 +117,4 @@ export async function getFraisLivraison(): Promise<FraisLivraison[]> {
     domicile: (r.fields.TarifDomicile as number) ?? 0,
     bureau: (r.fields.TarifBureau as number) ?? 0,
   }));
-}
-
-export async function createCommande(commande: NouvelleCommande): Promise<string> {
-  const table = env("AIRTABLE_TABLE_COMMANDES", "Commandes");
-  const res = await fetch(endpoint(table), {
-    method: "POST",
-    headers: { ...authHeaders(), "Content-Type": "application/json" },
-    cache: "no-store",
-    body: JSON.stringify({
-      fields: {
-        Produits: commande.produits,
-        Total: commande.total,
-        FraisLivraison: commande.fraisLivraison,
-        Nom: commande.nom,
-        Telephone: commande.telephone,
-        Wilaya: commande.wilaya,
-        Commune: commande.commune,
-        Adresse: commande.adresse,
-        ModeLivraison: commande.modeLivraison,
-        Statut: "Nouvelle",
-      },
-      typecast: true,
-    }),
-  });
-
-  if (!res.ok) {
-    throw new Error(`Airtable ${table} : ${res.status} ${await res.text()}`);
-  }
-
-  const record = (await res.json()) as AirtableRecord;
-  return String(record.fields.Numero ?? record.id);
 }
