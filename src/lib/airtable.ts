@@ -90,12 +90,21 @@ function toProduit(record: AirtableRecord): Produit {
 }
 
 export async function getProduits(): Promise<Produit[]> {
-  const params = new URLSearchParams({
-    "sort[0][field]": "Ordre",
-    "sort[0][direction]": "asc",
-  });
-  const records = await listRecords(env("AIRTABLE_TABLE_PRODUITS", "Produits"), params, 60);
-  return records.map(toProduit);
+  const records = await listRecords(
+    env("AIRTABLE_TABLE_PRODUITS", "Produits"),
+    new URLSearchParams(),
+    60,
+  );
+
+  // Tri côté serveur plutôt que via l'API : si le champ Ordre est absent ou
+  // renommé dans Airtable, le catalogue s'affiche quand même.
+  return records
+    .map((record) => ({
+      produit: toProduit(record),
+      ordre: typeof record.fields.Ordre === "number" ? record.fields.Ordre : Infinity,
+    }))
+    .sort((a, b) => a.ordre - b.ordre)
+    .map((entry) => entry.produit);
 }
 
 export async function getProduit(id: string): Promise<Produit | null> {
