@@ -89,6 +89,44 @@ summary {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Decor de fond : derive lente des carres flous, scintillement des eclats.
+   Uniquement transform et opacity, pour rester sur le compositeur. */
+@keyframes derive {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  33% {
+    translate: 3vw -4vh;
+  }
+  66% {
+    translate: -2vw 3vh;
+  }
+}
+
+.derive {
+  animation: derive linear infinite;
+  will-change: translate;
+}
+
+@keyframes scintille {
+  0%,
+  100% {
+    opacity: 0.08;
+    scale: 1;
+  }
+  50% {
+    opacity: 0.85;
+    scale: 1.6;
+  }
+}
+
+/* L'opacite de base sert de rendu fixe quand les animations sont coupees. */
+.scintille {
+  opacity: 0.35;
+  animation: scintille ease-in-out infinite;
+}
+
 /* Bandeau defilant. */
 @keyframes defile {
   to {

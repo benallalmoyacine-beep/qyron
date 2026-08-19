@@ -1,6 +1,5 @@
 import { getFraisLivraison, getProduits, type Produit } from "@/lib/airtable";
 import Bandeau from "@/components/Bandeau";
-import HeroProduit from "@/components/HeroProduit";
 import ProductCard from "@/components/ProductCard";
 
 // Rendu à la demande : le catalogue n'est jamais lu pendant le build, donc un
@@ -10,7 +9,7 @@ export const dynamic = "force-dynamic";
 
 function Message({ children }: { children: React.ReactNode }) {
   return (
-    <div className="tag flex min-h-[100dvh] items-center justify-center text-dim">
+    <div className="tag flex min-h-[60dvh] items-center justify-center text-dim">
       <p>{children}</p>
     </div>
   );
@@ -45,34 +44,30 @@ export default async function Accueil() {
     nbWilayas = 0;
   }
 
-  // Le produit coché « Vedette » dans Airtable ouvre la page. Sans coche, le
-  // premier de la liste prend sa place pour que le hero ne soit jamais vide.
-  const vedette = produits.find((p) => p.vedette) ?? produits[0];
-  const autres = produits.filter((p) => p.id !== vedette.id);
-
   return (
     <>
-      <HeroProduit produit={vedette} />
+      <section className="mx-auto max-w-[100rem] px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40">
+        <p className="tag flex items-center gap-3 text-heat">
+          <span className="h-px w-10 bg-heat" aria-hidden="true" />
+          Impression 3D — Algérie
+        </p>
+        <h1 className="display mt-6 text-[clamp(3rem,13vw,11rem)]">Le catalogue</h1>
+        <p className="chiffres tag mt-6 text-dim">
+          {String(produits.length).padStart(2, "0")} pièces disponibles à la commande
+        </p>
+      </section>
+
       <Bandeau />
 
-      {autres.length > 0 && (
-        <section className="mx-auto max-w-[100rem] px-5 py-24 sm:px-8 sm:py-32">
-          <div className="monte flex flex-wrap items-end justify-between gap-6 border-b border-line pb-6">
-            <h2 className="display text-[clamp(2.5rem,9vw,7rem)]">Le catalogue</h2>
-            <p className="chiffres tag text-dim">
-              {String(autres.length).padStart(2, "0")} pièces
-            </p>
-          </div>
+      <section className="mx-auto max-w-[100rem] px-5 py-16 sm:px-8 sm:py-24">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
+          {produits.map((produit, i) => (
+            <ProductCard key={produit.id} produit={produit} index={i + 1} />
+          ))}
+        </div>
+      </section>
 
-          <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
-            {autres.map((produit, i) => (
-              <ProductCard key={produit.id} produit={produit} index={i + 1} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section className="relative overflow-hidden border-t border-line bg-panel">
+      <section className="relative overflow-hidden border-t border-line bg-panel/70">
         <div className="mx-auto max-w-[100rem] px-5 py-24 sm:px-8 sm:py-32">
           <p className="monte display text-[clamp(2.5rem,11vw,9rem)]">
             Conçu ici.
@@ -91,9 +86,7 @@ export default async function Accueil() {
             </div>
           </div>
 
-          <p className="tag mt-20 text-dim">
-            QYRON — Impression 3D — Algérie
-          </p>
+          <p className="tag mt-20 text-dim">QYRON — Impression 3D — Algérie</p>
         </div>
       </section>
     </>

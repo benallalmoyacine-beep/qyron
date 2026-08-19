@@ -12,11 +12,7 @@ Pas de panier : les clients commandent par WhatsApp.
 ## Tables Airtable
 
 **Produits** — `Nom` (texte), `Description` (texte long), `Prix` (nombre), `Photos` (pièces jointes),
-`Dimensions` (texte, ex. `10 x 8 x 6`), `Disponible` (case à cocher), `Vedette` (case à cocher),
-`Ordre` (nombre).
-
-Cocher `Vedette` place le produit dans le grand bloc en haut de l'accueil. Une seule coche suffit ;
-si aucun produit n'est coché, le premier de la liste prend cette place.
+`Dimensions` (texte, ex. `10 x 8 x 6`), `Disponible` (case à cocher), `Ordre` (nombre).
 
 Décocher `Disponible` affiche « Indisponible » sur le produit ; il reste visible dans la vitrine.
 Sans champ `Ordre`, les produits s'affichent dans l'ordre d'Airtable.

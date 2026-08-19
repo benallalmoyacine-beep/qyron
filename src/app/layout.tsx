@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Inter } from "next/font/google";
+import Fond from "@/components/Fond";
 import Header from "@/components/Header";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#contenu" className="tag evitement bg-heat px-4 py-3 text-void">
           Aller au contenu
         </a>
+        <Fond />
         <Header />
         <main id="contenu">{children}</main>
         <WhatsAppButton />

@@ -9,7 +9,7 @@ const MOTS = [
 export default function Bandeau() {
   return (
     <div
-      className="overflow-hidden border-y border-line bg-panel py-4"
+      className="overflow-hidden border-y border-line bg-panel/60 py-4 backdrop-blur-sm"
       role="presentation"
       aria-hidden="true"
     >
