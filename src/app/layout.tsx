@@ -22,8 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={`${inter.variable} ${anton.variable}`}>
       <body className="grain min-h-dvh">
+        <a href="#contenu" className="tag evitement bg-heat px-4 py-3 text-void">
+          Aller au contenu
+        </a>
         <Header />
-        {children}
+        <main id="contenu">{children}</main>
         <WhatsAppButton />
       </body>
     </html>

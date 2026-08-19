@@ -13,7 +13,7 @@ export default function ProductCard({ produit, index }: { produit: Produit; inde
             alt={produit.nom}
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-active:scale-[0.98]"
           />
         ) : (
           <div className="tag flex h-full items-center justify-center text-dim">Photo à venir</div>
@@ -24,12 +24,15 @@ export default function ProductCard({ produit, index }: { produit: Produit; inde
           <span className="chiffres tag block">{formatPrix(produit.prix)}</span>
         </div>
 
-        <span className="chiffres tag absolute left-3 top-3 text-ink/70">
+        {/* Fond sombre derriere le numero : la photo produit peut etre claire. */}
+        <span className="chiffres tag absolute left-2 top-2 rounded-sm bg-void/70 px-1.5 py-0.5">
           {String(index).padStart(2, "0")}
         </span>
 
         {!produit.disponible && (
-          <span className="tag absolute right-3 top-3 bg-void/85 px-2 py-1">Indisponible</span>
+          <span className="tag absolute right-2 top-2 rounded-sm bg-void/85 px-2 py-1">
+            Indisponible
+          </span>
         )}
       </div>
 

@@ -23,6 +23,35 @@ body {
   overflow-x: hidden;
 }
 
+/* Supprime le delai de 300 ms au tap sans desactiver le zoom. */
+a,
+button,
+summary {
+  touch-action: manipulation;
+}
+
+/* Anneau de focus visible au clavier : le contour par defaut du navigateur
+   disparait sur fond noir. */
+:focus-visible {
+  outline: 2px solid var(--color-heat);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Lien d'evitement : masque jusqu'a ce qu'il recoive le focus clavier. */
+.evitement {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 60;
+  transform: translateY(-150%);
+  transition: transform 150ms ease-out;
+}
+
+.evitement:focus {
+  transform: translateY(0);
+}
+
 .display {
   font-family: var(--font-display);
   font-weight: 400;
@@ -31,9 +60,10 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* 12 px minimum : en dessous, des capitales espacees deviennent penibles. */
 .tag {
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   line-height: 1.4;
 }

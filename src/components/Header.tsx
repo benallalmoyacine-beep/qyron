@@ -6,7 +6,7 @@ export default function Header() {
       <div className="mx-auto flex h-14 max-w-[100rem] items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
-          className="display text-xl leading-none tracking-[0.12em] transition-colors duration-200 hover:text-heat"
+          className="display inline-flex h-full items-center pr-4 text-xl leading-none tracking-[0.12em] transition-colors duration-200 hover:text-heat"
         >
           QYRON
         </Link>

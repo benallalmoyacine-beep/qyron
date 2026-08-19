@@ -7,6 +7,7 @@ export default function WhatsAppButton() {
       href={`https://wa.me/${numero}`}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label="Commander par WhatsApp (nouvel onglet)"
       className="tag fixed bottom-5 right-5 z-40 inline-flex min-h-14 items-center gap-2.5 rounded-full bg-heat pl-4 pr-5 text-void shadow-xl shadow-heat/25 transition-transform duration-200 ease-out hover:scale-105 active:scale-[0.98] sm:right-8"
     >
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
