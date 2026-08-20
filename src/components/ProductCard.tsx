@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Produit } from "@/lib/airtable";
 import { formatPrix } from "@/lib/format";
+import Statut from "./Statut";
 
 export default function ProductCard({ produit, index }: { produit: Produit; index: number }) {
   return (
@@ -29,11 +30,9 @@ export default function ProductCard({ produit, index }: { produit: Produit; inde
           {String(index).padStart(2, "0")}
         </span>
 
-        {!produit.disponible && (
-          <span className="tag absolute right-2 top-2 rounded-sm bg-void/85 px-2 py-1">
-            Indisponible
-          </span>
-        )}
+        <span className="absolute right-2 top-2">
+          <Statut disponible={produit.disponible} compact />
+        </span>
       </div>
 
       <div className="mt-3 flex items-baseline justify-between gap-3">

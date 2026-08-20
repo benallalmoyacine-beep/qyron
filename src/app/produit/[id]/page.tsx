@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getFraisLivraison, getProduit, type FraisLivraison } from "@/lib/airtable";
 import { formatPrix } from "@/lib/format";
 import DetailsLivraison from "@/components/DetailsLivraison";
+import Statut from "@/components/Statut";
 
 // Voir app/page.tsx : pas de lecture Airtable pendant le build.
 export const dynamic = "force-dynamic";
@@ -91,12 +92,8 @@ export default async function FicheProduit({ params }: { params: Promise<{ id: s
             </div>
             <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">
               <dt className="tag text-dim">Statut</dt>
-              <dd className="flex items-center gap-2">
-                <span
-                  aria-hidden="true"
-                  className={`h-1.5 w-1.5 rounded-full ${produit.disponible ? "bg-heat" : "bg-dim"}`}
-                />
-                {produit.disponible ? "Disponible" : "Indisponible"}
+              <dd>
+                <Statut disponible={produit.disponible} />
               </dd>
             </div>
             <div className="flex items-baseline justify-between gap-6 border-b border-line py-4">

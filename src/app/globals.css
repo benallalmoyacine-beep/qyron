@@ -9,6 +9,8 @@
   --color-dim: #8d97ad;
   --color-heat: #ff5a1f;
   --color-glow: #3d6fd4;
+  --color-ok: #3ddc84;
+  --color-ko: #ff3b5c;
   --color-line: #232f47;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
