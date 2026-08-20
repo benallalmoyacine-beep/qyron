@@ -4,7 +4,7 @@ import type { Produit } from "@/lib/airtable";
 import { formatPrix } from "@/lib/format";
 import Statut from "./Statut";
 
-export default function ProductCard({ produit, index }: { produit: Produit; index: number }) {
+export default function ProductCard({ produit }: { produit: Produit }) {
   return (
     <Link href={`/produit/${produit.id}`} className="monte group block">
       <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-tile">
@@ -20,15 +20,14 @@ export default function ProductCard({ produit, index }: { produit: Produit; inde
           <div className="tag flex h-full items-center justify-center text-dim">Photo à venir</div>
         )}
 
-        {/* Le prix se revele au survol, en bas de la vignette. */}
-        <div className="absolute inset-x-0 bottom-0 translate-y-full bg-heat px-3 py-2.5 text-void transition-transform duration-300 ease-out group-hover:translate-y-0">
+        {/* Le prix se revele au survol. Masque aux lecteurs d'ecran : il est
+            deja annonce par la ligne visible sous la vignette. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 translate-y-full bg-heat px-3 py-2.5 text-void transition-transform duration-300 ease-out group-hover:translate-y-0"
+        >
           <span className="chiffres tag block">{formatPrix(produit.prix)}</span>
         </div>
-
-        {/* Fond sombre derriere le numero : la photo produit peut etre claire. */}
-        <span className="chiffres tag absolute left-2 top-2 rounded-sm bg-void/70 px-1.5 py-0.5">
-          {String(index).padStart(2, "0")}
-        </span>
 
         <span className="absolute right-2 top-2">
           <Statut disponible={produit.disponible} compact />

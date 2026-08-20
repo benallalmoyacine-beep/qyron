@@ -92,8 +92,8 @@ export default function Catalogue({ produits }: { produits: Produit[] }) {
         <p className="tag py-24 text-center text-dim">Aucun produit ne correspond</p>
       ) : (
         <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
-          {resultats.map((produit, i) => (
-            <ProductCard key={produit.id} produit={produit} index={i + 1} />
+          {resultats.map((produit) => (
+            <ProductCard key={produit.id} produit={produit} />
           ))}
         </div>
       )}

@@ -63,9 +63,6 @@ export default async function FicheProduit({ params }: { params: Promise<{ id: s
                 priority={i === 0}
                 className="object-cover"
               />
-              <span className="chiffres tag absolute left-3 top-3 text-ink/70">
-                {String(i + 1).padStart(2, "0")}
-              </span>
             </div>
           ))}
         </div>
