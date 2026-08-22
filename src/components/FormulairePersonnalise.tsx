@@ -105,7 +105,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
 
   if (etat === "envoye") {
     return (
-      <div className="mt-12 max-w-xl">
+      <div className="mt-6 max-w-xl">
         <p className="text-lg">
           {t.merciDebut} {prenom} {nom}
           {t.merciSuite}
@@ -135,7 +135,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
   }
 
   return (
-    <div className="mt-12 max-w-xl">
+    <div className="mt-6 max-w-xl">
       <input
         ref={champFichier}
         id="photo"
@@ -145,43 +145,52 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
         className="sr-only"
       />
 
-      <button
-        type="button"
-        onClick={() => champFichier.current?.click()}
-        className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-3xl border border-dashed border-line bg-panel transition-colors duration-200 hover:border-ink sm:aspect-[3/2]"
-      >
-        {photo ? (
-          <Image src={photo.apercu} alt={t.apercuPhoto} fill unoptimized className="object-contain" />
-        ) : (
-          <span className="tag flex flex-col items-center gap-3 text-dim">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              aria-hidden="true"
-            >
-              <path d="M12 5v14M5 12h14" />
-            </svg>
-            {t.ajouteTaPhoto}
-          </span>
-        )}
-      </button>
-
-      {photo && (
+      {/* Hauteur fixe plutot qu'un ratio : un ratio 4/5 sur 343 px de large
+          donnait 429 px, soit deux tiers d'un ecran de 667 px. Le plafond a
+          30 dvh garantit que la zone ne reprend jamais le dessus. */}
+      <div className="relative max-h-[30dvh] h-[200px] sm:h-[240px]">
         <button
           type="button"
           onClick={() => champFichier.current?.click()}
-          className="tag mt-3 min-h-11 text-dim underline underline-offset-4 transition-colors duration-200 hover:text-ink"
+          className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-3xl border border-dashed border-line bg-panel transition-colors duration-200 hover:border-ink"
         >
-          {t.changerPhoto}
+          {photo ? (
+            <Image src={photo.apercu} alt={t.apercuPhoto} fill unoptimized className="object-cover" />
+          ) : (
+            <span className="tag flex flex-col items-center gap-3 text-dim">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+              {t.ajouteTaPhoto}
+            </span>
+          )}
         </button>
-      )}
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+        {/* Pose par-dessus la zone, et non en dessous : un bouton place a la
+            suite rallongerait le formulaire des qu'une photo est choisie.
+            Voisin et non enfant du bouton : un bouton dans un bouton est
+            invalide et casse la navigation clavier. */}
+        {photo && (
+          <button
+            type="button"
+            onClick={() => champFichier.current?.click()}
+            className="tag absolute bottom-3 right-3 min-h-11 rounded-full bg-void/85 px-4 backdrop-blur-sm transition-colors duration-200 hover:bg-void"
+          >
+            {t.changerPhoto}
+          </button>
+        )}
+      </div>
+
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="prenom" className="tag block text-dim">
             {t.prenom}
@@ -193,7 +202,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
             onChange={(e) => setPrenom(e.target.value)}
             autoComplete="given-name"
             maxLength={80}
-            className="mt-2 h-14 w-full rounded-xl border border-line bg-panel px-4 text-base focus:border-ink focus:outline-none"
+            className="mt-1.5 h-14 w-full rounded-xl border border-line bg-panel px-4 text-base focus:border-ink focus:outline-none"
           />
         </div>
 
@@ -208,13 +217,13 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
             onChange={(e) => setNom(e.target.value)}
             autoComplete="family-name"
             maxLength={80}
-            className="mt-2 h-14 w-full rounded-xl border border-line bg-panel px-4 text-base focus:border-ink focus:outline-none"
+            className="mt-1.5 h-14 w-full rounded-xl border border-line bg-panel px-4 text-base focus:border-ink focus:outline-none"
           />
         </div>
       </div>
 
       {erreur && (
-        <p role="alert" className="mt-6 rounded-xl border border-ko/50 bg-panel px-4 py-3 text-sm">
+        <p role="alert" className="mt-4 rounded-xl border border-ko/50 bg-panel px-4 py-3 text-sm">
           {erreur}
         </p>
       )}
@@ -224,7 +233,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
         type="button"
         disabled={!complet || etat === "envoi"}
         onClick={() => setConfirmation(true)}
-        className="tag carte mt-8 inline-flex min-h-14 items-center gap-3 rounded-full bg-ink px-8 text-void transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-40"
+        className="tag carte mt-6 inline-flex min-h-14 items-center gap-3 rounded-full bg-ink px-8 text-void transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {etat === "envoi" && (
           <span
