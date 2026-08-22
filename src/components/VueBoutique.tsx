@@ -38,7 +38,7 @@ export default function VueBoutique({
 
   return (
     <>
-      <section className="mx-auto max-w-[90rem] px-5 pb-14 pt-28 sm:px-8 sm:pb-16 sm:pt-36">
+      <section className="mx-auto max-w-[90rem] px-5 pb-14 pt-12 sm:px-8 sm:pb-16 sm:pt-20">
         <p className="tag text-dim">{t.impression3d}</p>
 
         {/* Titre a deux tons : la seconde ligne en gris, comme sur la

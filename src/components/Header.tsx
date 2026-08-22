@@ -33,7 +33,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-line/70 bg-void/80 backdrop-blur-xl">
+    <header className="relative z-40 border-b border-[color:var(--color-bordure-entete)] bg-void">
       <div className="mx-auto flex h-14 max-w-[100rem] items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
@@ -72,7 +72,7 @@ export default function Header() {
       {ouvert && (
         <nav
           id="menu-principal"
-          className="border-t border-line/70 bg-panel/95 backdrop-blur-xl"
+          className="border-t border-[color:var(--color-bordure-entete)] bg-void"
         >
           <ul className="mx-auto max-w-[100rem] px-5 py-4 sm:px-8">
             {LIENS.map((lien) => {

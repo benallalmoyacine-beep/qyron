@@ -25,14 +25,14 @@ export default function ChoixLangue() {
         <button
           type="button"
           onClick={() => choisir("fr")}
-          className="carte display flex min-h-16 flex-1 items-center justify-center rounded-full bg-panel text-xl transition-colors duration-200 hover:bg-ink hover:text-panel"
+          className="display flex min-h-16 flex-1 items-center justify-center rounded-full border border-line bg-panel text-xl transition-colors duration-200 hover:bg-ink hover:text-void"
         >
           {TEXTES.fr.francais}
         </button>
         <button
           type="button"
           onClick={() => choisir("en")}
-          className="carte display flex min-h-16 flex-1 items-center justify-center rounded-full bg-panel text-xl transition-colors duration-200 hover:bg-ink hover:text-panel"
+          className="display flex min-h-16 flex-1 items-center justify-center rounded-full border border-line bg-panel text-xl transition-colors duration-200 hover:bg-ink hover:text-void"
         >
           {TEXTES.en.anglais}
         </button>

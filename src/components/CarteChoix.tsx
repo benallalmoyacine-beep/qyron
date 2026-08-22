@@ -39,7 +39,7 @@ export default function CarteChoix({
         <p className="mt-2 text-sm leading-relaxed text-dim sm:text-base">{sous}</p>
 
         {/* Pastille blanche a ombre douce, comme sur la reference. */}
-        <span className="carte mt-5 inline-flex min-h-11 items-center gap-3 rounded-full bg-panel px-5 text-sm transition-colors duration-200 group-hover:bg-ink group-hover:text-panel">
+        <span className="mt-5 inline-flex min-h-11 items-center gap-3 rounded-full bg-ink px-5 text-sm text-void transition-opacity duration-200 group-hover:opacity-80">
           {bouton}
           <svg
             width="14"

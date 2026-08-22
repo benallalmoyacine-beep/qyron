@@ -7,7 +7,7 @@ export default function Bandeau() {
 
   return (
     <div
-      className="overflow-hidden border-y border-line bg-panel/70 py-4 backdrop-blur-sm"
+      className="overflow-hidden border-y border-line bg-section py-4"
       role="presentation"
       aria-hidden="true"
     >

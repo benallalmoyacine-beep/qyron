@@ -18,7 +18,7 @@ export default function VueProduit({
   const t = useT();
 
   return (
-    <article className="mx-auto max-w-[90rem] px-5 pb-28 pt-24 sm:px-8">
+    <article className="mx-auto max-w-[90rem] px-5 pb-28 pt-10 sm:px-8">
       <Link
         href="/boutique"
         className="tag inline-flex min-h-11 items-center gap-2 text-dim transition-colors duration-200 hover:opacity-60"
@@ -44,7 +44,7 @@ export default function VueProduit({
       <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
         <div className="space-y-4">
           {produit.photos.map((photo, i) => (
-            <div key={photo} className="relative aspect-square overflow-hidden rounded-3xl bg-tile">
+            <div key={photo} className="relative aspect-square overflow-hidden rounded-[18px] bg-tile">
               <Image
                 src={photo}
                 alt={
@@ -61,7 +61,7 @@ export default function VueProduit({
           ))}
         </div>
 
-        <div className="lg:sticky lg:top-24 lg:self-start">
+        <div className="lg:sticky lg:top-8 lg:self-start">
           <p className="chiffres display text-[clamp(2rem,5vw,3rem)]">
             {formatPrix(produit.prix)}
           </p>

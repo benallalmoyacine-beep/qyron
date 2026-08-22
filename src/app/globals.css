@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* Gris clair, encre presque noire, aucun accent colore : la hierarchie
-     passe par la taille, le blanc et le contraste, pas par la couleur. */
-  --color-void: #f5f5f7;
-  --color-panel: #ffffff;
-  --color-tile: #ebebef;
-  --color-ink: #1d1d1f;
-  --color-dim: #6e6e73;
-  --color-heat: #1d1d1f;
+  /* Mode sombre : la hierarchie passe par la profondeur des noirs et le
+     contraste de ton, jamais par un accent colore. */
+  --color-void: #0a0a0a;
+  --color-section: #121212;
+  --color-panel: #1a1a1a;
+  --color-tile: #1a1a1a;
+  --color-ink: #f5f5f7;
+  --color-dim: #8e8e93;
+  --color-heat: #ffffff;
   --color-glow: #ffffff;
-  --color-ok: #1a8a4a;
-  --color-ko: #c8102e;
-  --color-line: #d8d8dd;
+  --color-ok: #3ddc84;
+  --color-ko: #ff453a;
+  --color-line: #2a2a2a;
+  --color-bordure-entete: #1f1f1f;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -84,31 +86,72 @@ summary {
   color: var(--color-dim);
 }
 
-/* Ombre douce des cartes, unique echelle pour tout le site. */
+/* Sur fond sombre une ombre portee est invisible : c'est un liseré clair
+   qui detache une surface. Meme echelle pour tout le site. */
 .carte {
   box-shadow:
-    0 1px 2px rgb(0 0 0 / 0.04),
-    0 8px 24px rgb(0 0 0 / 0.06);
+    inset 0 0 0 1px rgb(255 255 255 / 0.06),
+    0 12px 32px rgb(0 0 0 / 0.45);
 }
 
-/* Decor de fond : grandes formes arrondies blanches en derive lente.
-   Uniquement translate, pour rester sur le compositeur. */
-@keyframes derive {
+/* Cubes flottants. Deux elements imbriques : l'exterieur monte et descend,
+   l'interieur tourne. Un seul element ne peut pas porter deux animations
+   sur transform sans que la seconde ecrase la premiere. */
+@keyframes flotter {
   0%,
   100% {
-    translate: 0 0;
+    transform: translateY(0);
   }
-  33% {
-    translate: 3vw -4vh;
-  }
-  66% {
-    translate: -2vw 3vh;
+  50% {
+    transform: translateY(var(--amplitude));
   }
 }
 
-.derive {
-  animation: derive linear infinite;
-  will-change: translate;
+@keyframes tourner {
+  from {
+    transform: rotateX(-28deg) rotateY(35deg);
+  }
+  to {
+    transform: rotateX(332deg) rotateY(395deg);
+  }
+}
+
+.cube-flotte {
+  position: absolute;
+  animation: flotter ease-in-out infinite;
+  will-change: transform;
+}
+
+.cube {
+  position: relative;
+  transform-style: preserve-3d;
+  /* Angle isometrique au repos : si les animations sont coupees, le volume
+     reste lisible. */
+  transform: rotateX(-28deg) rotateY(35deg);
+  animation: tourner linear infinite;
+}
+
+.cube span {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+/* Trois teintes pour trois orientations : c'est l'ecart de valeur qui fait
+   lire le volume, pas la perspective seule. */
+.cube .dessus {
+  background: #ffffff;
+  transform: rotateX(90deg) translateZ(var(--demi));
+}
+
+.cube .avant {
+  background: #e0e0e0;
+  transform: translateZ(var(--demi));
+}
+
+.cube .cote {
+  background: #b8b8b8;
+  transform: rotateY(90deg) translateZ(var(--demi));
 }
 
 /* Bandeau defilant. */

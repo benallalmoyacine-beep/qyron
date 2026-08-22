@@ -7,7 +7,7 @@ export default function VueAPropos({ blocs }: { blocs: Bloc[] }) {
   const t = useT();
 
   return (
-    <article className="mx-auto max-w-[90rem] px-5 pb-28 pt-28 sm:px-8 sm:pt-36">
+    <article className="mx-auto max-w-[90rem] px-5 pb-28 pt-12 sm:px-8 sm:pt-20">
       <p className="tag text-dim">QYRON</p>
       <h1 className="display mt-5 text-[clamp(2.5rem,7vw,5rem)]">{t.aPropos}</h1>
 

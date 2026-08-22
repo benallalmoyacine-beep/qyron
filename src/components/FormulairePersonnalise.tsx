@@ -115,7 +115,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
           href={instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="tag carte mt-8 inline-flex min-h-14 items-center gap-2.5 rounded-full bg-ink px-6 text-panel transition-transform duration-200 hover:scale-105"
+          className="tag carte mt-8 inline-flex min-h-14 items-center gap-2.5 rounded-full bg-ink px-6 text-void transition-transform duration-200 hover:scale-105"
         >
           <IconeInstagram />
           {t.ouvrirInstagram}
@@ -224,19 +224,19 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
         type="button"
         disabled={!complet || etat === "envoi"}
         onClick={() => setConfirmation(true)}
-        className="tag carte mt-8 inline-flex min-h-14 items-center gap-3 rounded-full bg-ink px-8 text-panel transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-40"
+        className="tag carte mt-8 inline-flex min-h-14 items-center gap-3 rounded-full bg-ink px-8 text-void transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {etat === "envoi" && (
           <span
             aria-hidden="true"
-            className="h-4 w-4 animate-spin rounded-full border-2 border-panel/40 border-t-panel"
+            className="h-4 w-4 animate-spin rounded-full border-2 border-void/30 border-t-void"
           />
         )}
         {etat === "envoi" ? t.envoiEnCours : t.creerFigurine}
       </button>
 
       {confirmation && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 px-5 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-void/80 px-5 backdrop-blur-sm">
           <div
             role="dialog"
             aria-modal="true"
@@ -252,7 +252,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
                 ref={boutonOui}
                 type="button"
                 onClick={envoyer}
-                className="tag min-h-14 flex-1 rounded-full bg-ink text-panel"
+                className="tag min-h-14 flex-1 rounded-full bg-ink text-void"
               >
                 {t.oui}
               </button>

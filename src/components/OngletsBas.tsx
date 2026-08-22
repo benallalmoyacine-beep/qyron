@@ -106,7 +106,7 @@ export default function OngletsBas() {
 
       <nav
         aria-label={t.accueil}
-        className="fixed inset-x-0 bottom-0 z-40 border-t border-line/70 bg-panel/85 backdrop-blur-xl"
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-[color:var(--color-bordure-entete)] bg-void"
       >
         <ul className="mx-auto flex max-w-[100rem] items-stretch">
           {onglets.map(({ href, libelle, Icone }) => {

@@ -14,7 +14,7 @@ export default function ProductCard({ produit }: { produit: Produit }) {
     <Link href={`/produit/${produit.id}`} className="monte group block">
       {/* Le produit est pose sur une tuile claire, nom et prix centres en
           dessous : c'est la disposition des references fournies. */}
-      <div className="relative aspect-square overflow-hidden rounded-2xl bg-tile">
+      <div className="relative aspect-square overflow-hidden rounded-[18px] bg-tile">
         {produit.photos[0] ? (
           <Image
             src={produit.photos[0]}
