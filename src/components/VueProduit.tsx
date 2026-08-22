@@ -44,7 +44,11 @@ export default function VueProduit({
       <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
         <div className="space-y-4">
           {produit.photos.map((photo, i) => (
-            <div key={photo} className="relative aspect-square overflow-hidden rounded-[18px] bg-tile">
+            <div
+              key={photo}
+              data-arrivee={i === 0 ? produit.id : undefined}
+              className="relative aspect-square overflow-hidden rounded-[18px] bg-tile"
+            >
               <Image
                 src={photo}
                 alt={

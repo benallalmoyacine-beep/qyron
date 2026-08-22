@@ -2,19 +2,39 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 import type { Produit } from "@/lib/airtable";
 import { formatPrix } from "@/lib/format";
 import Statut from "./Statut";
 import { useT } from "@/lib/langue";
+import { useTransition } from "@/lib/transition";
 
 export default function ProductCard({ produit }: { produit: Produit }) {
   const t = useT();
+  const transition = useTransition();
+  const cadre = useRef<HTMLDivElement>(null);
+
+  const href = `/produit/${produit.id}`;
+
+  function surClic(e: React.MouseEvent<HTMLAnchorElement>) {
+    // Clic milieu, Ctrl/Cmd, nouvel onglet : on laisse le navigateur faire.
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+
+    const image = cadre.current?.querySelector("img");
+    if (!transition || !image) return;
+
+    e.preventDefault();
+    transition.envoler(image, produit.id, href);
+  }
 
   return (
-    <Link href={`/produit/${produit.id}`} className="monte group block">
+    <Link href={href} onClick={surClic} className="monte group block">
       {/* Le produit est pose sur une tuile claire, nom et prix centres en
           dessous : c'est la disposition des references fournies. */}
-      <div className="relative aspect-square overflow-hidden rounded-[18px] bg-tile">
+      <div
+        ref={cadre}
+        className="relative aspect-square overflow-hidden rounded-[18px] bg-tile"
+      >
         {produit.photos[0] ? (
           <Image
             src={produit.photos[0]}

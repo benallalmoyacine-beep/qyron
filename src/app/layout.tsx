@@ -7,6 +7,7 @@ import OngletsBas from "@/components/OngletsBas";
 import LienEvitement from "@/components/LienEvitement";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { LangueProvider } from "@/lib/langue";
+import { TransitionProvider } from "@/lib/transition";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {/* pb-16 : les onglets fixes du bas ne doivent jamais masquer le contenu. */}
       <body className="min-h-dvh pb-16">
         <LangueProvider>
+          <TransitionProvider>
           <ChoixLangue />
           <LienEvitement />
           <Fond />
@@ -35,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="contenu">{children}</main>
           <WhatsAppButton />
           <OngletsBas />
+          </TransitionProvider>
         </LangueProvider>
       </body>
     </html>

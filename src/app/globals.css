@@ -208,6 +208,16 @@ summary {
   background: #b3232f;
 }
 
+/* Le contenu s'efface pendant qu'une image vole d'une page a l'autre.
+   Sortie rapide, retour immediat : c'est la copie qui porte le regard. */
+#contenu {
+  transition: opacity 180ms ease-out;
+}
+
+#contenu[data-transition="sortie"] {
+  opacity: 0;
+}
+
 /* Bandeau defilant. */
 @keyframes defile {
   to {
