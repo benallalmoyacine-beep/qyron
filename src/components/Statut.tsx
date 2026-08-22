@@ -1,3 +1,7 @@
+"use client";
+
+import { useT } from "@/lib/langue";
+
 /**
  * Pastille de disponibilite. Le texte accompagne toujours la couleur :
  * le rouge et le vert sont la paire que les daltoniens distinguent le moins.
@@ -9,6 +13,8 @@ export default function Statut({
   disponible: boolean;
   compact?: boolean;
 }) {
+  const t = useT();
+
   return (
     <span
       className={
@@ -21,7 +27,7 @@ export default function Statut({
         aria-hidden="true"
         className={`h-2 w-2 shrink-0 rounded-full ${disponible ? "bg-ok" : "bg-ko"}`}
       />
-      {disponible ? "Disponible" : "Indisponible"}
+      {disponible ? t.disponible : t.indisponible}
     </span>
   );
 }

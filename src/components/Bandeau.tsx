@@ -1,12 +1,10 @@
-const MOTS = [
-  "Impression 3D",
-  "Fabriqué en Algérie",
-  "Toutes les couleurs",
-  "Paiement à la livraison",
-  "Sur commande",
-];
+"use client";
+
+import { useT } from "@/lib/langue";
 
 export default function Bandeau() {
+  const mots = useT().bandeau;
+
   return (
     <div
       className="overflow-hidden border-y border-line bg-panel/60 py-4 backdrop-blur-sm"
@@ -17,7 +15,7 @@ export default function Bandeau() {
       <div className="defile flex w-max gap-10 whitespace-nowrap">
         {[0, 1].map((copie) => (
           <ul key={copie} className="flex gap-10">
-            {MOTS.map((mot) => (
+            {mots.map((mot) => (
               <li key={mot} className="tag flex items-center gap-10 text-dim">
                 {mot}
                 <span className="h-1 w-1 rounded-full bg-heat" />

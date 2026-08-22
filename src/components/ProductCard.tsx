@@ -1,10 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import type { Produit } from "@/lib/airtable";
 import { formatPrix } from "@/lib/format";
 import Statut from "./Statut";
+import { useT } from "@/lib/langue";
 
 export default function ProductCard({ produit }: { produit: Produit }) {
+  const t = useT();
+
   return (
     <Link href={`/produit/${produit.id}`} className="monte group block">
       <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-tile">

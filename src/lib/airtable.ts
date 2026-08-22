@@ -142,3 +142,37 @@ export async function getContenu(page: string): Promise<Bloc[]> {
     }))
     .sort((a, b) => a.ordre - b.ordre);
 }
+
+export type NouvelleDemande = {
+  prenom: string;
+  nom: string;
+  urlPhoto: string;
+};
+
+/** Crée une ligne dans DemandesPersonnalisees. Jamais mise en cache. */
+export async function createDemande(demande: NouvelleDemande): Promise<string> {
+  const table = env("AIRTABLE_TABLE_DEMANDES", "DemandesPersonnalisees");
+
+  const res = await fetch(endpoint(table), {
+    method: "POST",
+    headers: { ...authHeaders(), "Content-Type": "application/json" },
+    cache: "no-store",
+    body: JSON.stringify({
+      fields: {
+        Prenom: demande.prenom,
+        Nom: demande.nom,
+        Photo: demande.urlPhoto,
+        Date: new Date().toISOString(),
+        Statut: "Nouvelle demande",
+      },
+      typecast: true,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Airtable ${table} : ${res.status} ${await res.text()}`);
+  }
+
+  const record = (await res.json()) as AirtableRecord;
+  return record.id;
+}

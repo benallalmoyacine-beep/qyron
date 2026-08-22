@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { Produit } from "@/lib/airtable";
+import { useT } from "@/lib/langue";
 import ProductCard from "./ProductCard";
 
 /** Retire accents et casse : « Vase » trouve « vasé », « VASE », « vase ». */
@@ -13,6 +14,7 @@ function normalise(texte: string) {
 }
 
 export default function Catalogue({ produits }: { produits: Produit[] }) {
+  const t = useT();
   const [recherche, setRecherche] = useState("");
 
   const resultats = useMemo(() => {
@@ -27,7 +29,7 @@ export default function Catalogue({ produits }: { produits: Produit[] }) {
     <>
       <div className="relative">
         <label htmlFor="recherche" className="tag block text-dim">
-          Rechercher
+          {t.rechercher}
         </label>
 
         <div className="relative mt-3">
@@ -52,7 +54,7 @@ export default function Catalogue({ produits }: { produits: Produit[] }) {
             type="search"
             value={recherche}
             onChange={(e) => setRecherche(e.target.value)}
-            placeholder="Nom d'un produit…"
+            placeholder={t.rechercherPlaceholder}
             autoComplete="off"
             className="h-14 w-full rounded-full border border-line bg-panel/60 pl-12 pr-12 text-base placeholder:text-dim focus:border-heat focus:outline-none"
           />
@@ -61,7 +63,7 @@ export default function Catalogue({ produits }: { produits: Produit[] }) {
             <button
               type="button"
               onClick={() => setRecherche("")}
-              aria-label="Effacer la recherche"
+              aria-label={t.effacerRecherche}
               className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-dim transition-colors duration-200 hover:text-ink"
             >
               <svg
@@ -83,13 +85,13 @@ export default function Catalogue({ produits }: { produits: Produit[] }) {
         {/* Annonce le nombre de resultats aux lecteurs d'ecran. */}
         <p aria-live="polite" className="tag mt-3 text-dim">
           {recherche
-            ? `${String(resultats.length).padStart(2, "0")} résultat${resultats.length > 1 ? "s" : ""}`
-            : `${String(produits.length).padStart(2, "0")} pièces`}
+            ? `${String(resultats.length).padStart(2, "0")} ${resultats.length > 1 ? t.resultats : t.resultat}`
+            : `${String(produits.length).padStart(2, "0")} ${t.pieces}`}
         </p>
       </div>
 
       {resultats.length === 0 ? (
-        <p className="tag py-24 text-center text-dim">Aucun produit ne correspond</p>
+        <p className="tag py-24 text-center text-dim">{t.aucunResultat}</p>
       ) : (
         <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
           {resultats.map((produit) => (

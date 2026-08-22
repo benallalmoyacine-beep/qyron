@@ -3,13 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
-const LIENS = [
-  { href: "/", libelle: "Accueil" },
-  { href: "/a-propos", libelle: "À propos" },
-];
+import { useT } from "@/lib/langue";
 
 export default function Header() {
+  const t = useT();
   const [ouvert, setOuvert] = useState(false);
   const chemin = usePathname();
   const bouton = useRef<HTMLButtonElement>(null);
@@ -30,6 +27,11 @@ export default function Header() {
     return () => document.removeEventListener("keydown", surTouche);
   }, [ouvert]);
 
+  const LIENS = [
+    { href: "/", libelle: t.accueil },
+    { href: "/a-propos", libelle: t.aPropos },
+  ];
+
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-line/60 bg-void/70 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-[100rem] items-center justify-between px-5 sm:px-8">
@@ -46,7 +48,7 @@ export default function Header() {
           onClick={() => setOuvert((o) => !o)}
           aria-expanded={ouvert}
           aria-controls="menu-principal"
-          aria-label={ouvert ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={ouvert ? t.fermerMenu : t.ouvrirMenu}
           className="-mr-2 flex h-11 w-11 flex-col items-center justify-center gap-[5px] px-2"
         >
           <span

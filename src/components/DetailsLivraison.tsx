@@ -1,13 +1,17 @@
+"use client";
+
 import type { FraisLivraison } from "@/lib/airtable";
+import { useT } from "@/lib/langue";
 import { formatPrix } from "@/lib/format";
 
 export default function DetailsLivraison({ frais }: { frais: FraisLivraison[] }) {
+  const t = useT();
   if (frais.length === 0) return null;
 
   return (
     <details className="mt-10 overflow-hidden rounded-sm border border-line">
       <summary className="tag flex min-h-14 cursor-pointer items-center justify-between gap-4 px-4 py-4 transition-colors duration-200 hover:text-heat">
-        Frais de livraison
+        {t.fraisLivraison}
         <svg
           width="18"
           height="18"
@@ -29,13 +33,13 @@ export default function DetailsLivraison({ frais }: { frais: FraisLivraison[] })
           <thead className="tag sticky top-0 bg-panel text-dim">
             <tr>
               <th scope="col" className="px-4 py-3 font-normal">
-                Wilaya
+                {t.wilaya}
               </th>
               <th scope="col" className="px-2 py-3 text-right font-normal">
-                Domicile
+                {t.domicile}
               </th>
               <th scope="col" className="px-4 py-3 text-right font-normal">
-                Bureau
+                {t.bureau}
               </th>
             </tr>
           </thead>
