@@ -115,7 +115,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
           href={instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="tag mt-8 inline-flex min-h-14 items-center gap-2.5 rounded-full bg-heat px-6 text-void transition-transform duration-200 hover:scale-105"
+          className="tag carte mt-8 inline-flex min-h-14 items-center gap-2.5 rounded-full bg-ink px-6 text-panel transition-transform duration-200 hover:scale-105"
         >
           <IconeInstagram />
           {t.ouvrirInstagram}
@@ -148,7 +148,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
       <button
         type="button"
         onClick={() => champFichier.current?.click()}
-        className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-2xl border border-dashed border-line bg-panel/50 transition-colors duration-200 hover:border-heat sm:aspect-[3/2]"
+        className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-3xl border border-dashed border-line bg-panel transition-colors duration-200 hover:border-ink sm:aspect-[3/2]"
       >
         {photo ? (
           <Image src={photo.apercu} alt={t.apercuPhoto} fill unoptimized className="object-contain" />
@@ -193,7 +193,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
             onChange={(e) => setPrenom(e.target.value)}
             autoComplete="given-name"
             maxLength={80}
-            className="mt-2 h-14 w-full rounded-xl border border-line bg-panel/60 px-4 text-base focus:border-heat focus:outline-none"
+            className="mt-2 h-14 w-full rounded-xl border border-line bg-panel px-4 text-base focus:border-ink focus:outline-none"
           />
         </div>
 
@@ -208,13 +208,13 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
             onChange={(e) => setNom(e.target.value)}
             autoComplete="family-name"
             maxLength={80}
-            className="mt-2 h-14 w-full rounded-xl border border-line bg-panel/60 px-4 text-base focus:border-heat focus:outline-none"
+            className="mt-2 h-14 w-full rounded-xl border border-line bg-panel px-4 text-base focus:border-ink focus:outline-none"
           />
         </div>
       </div>
 
       {erreur && (
-        <p role="alert" className="mt-6 rounded-xl border border-ko/60 px-4 py-3 text-sm">
+        <p role="alert" className="mt-6 rounded-xl border border-ko/50 bg-panel px-4 py-3 text-sm">
           {erreur}
         </p>
       )}
@@ -224,24 +224,24 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
         type="button"
         disabled={!complet || etat === "envoi"}
         onClick={() => setConfirmation(true)}
-        className="tag mt-8 inline-flex min-h-14 items-center gap-3 rounded-full bg-heat px-8 text-void transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-40"
+        className="tag carte mt-8 inline-flex min-h-14 items-center gap-3 rounded-full bg-ink px-8 text-panel transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {etat === "envoi" && (
           <span
             aria-hidden="true"
-            className="h-4 w-4 animate-spin rounded-full border-2 border-void/30 border-t-void"
+            className="h-4 w-4 animate-spin rounded-full border-2 border-panel/40 border-t-panel"
           />
         )}
         {etat === "envoi" ? t.envoiEnCours : t.creerFigurine}
       </button>
 
       {confirmation && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-void/80 px-5 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 px-5 backdrop-blur-sm">
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="titre-confirmation"
-            className="w-full max-w-md rounded-2xl border border-line bg-panel p-6"
+            className="carte w-full max-w-md rounded-3xl bg-panel p-6"
           >
             <h2 id="titre-confirmation" className="text-lg">
               {t.confirmerTitre}
@@ -252,7 +252,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
                 ref={boutonOui}
                 type="button"
                 onClick={envoyer}
-                className="tag min-h-14 flex-1 rounded-full bg-heat text-void"
+                className="tag min-h-14 flex-1 rounded-full bg-ink text-panel"
               >
                 {t.oui}
               </button>
@@ -262,7 +262,7 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
                   setConfirmation(false);
                   boutonCreer.current?.focus();
                 }}
-                className="tag min-h-14 flex-1 rounded-full border border-line transition-colors duration-200 hover:border-ink"
+                className="tag min-h-14 flex-1 rounded-full border border-line bg-panel transition-colors duration-200 hover:border-ink"
               >
                 {t.annuler}
               </button>

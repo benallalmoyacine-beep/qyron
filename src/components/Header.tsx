@@ -33,11 +33,11 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-line/60 bg-void/70 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-line/70 bg-void/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-[100rem] items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
-          className="display inline-flex h-full items-center pr-4 text-xl leading-none tracking-[0.12em] transition-colors duration-200 hover:text-heat"
+          className="display inline-flex h-full items-center pr-4 text-lg tracking-[0.06em] transition-opacity duration-200 hover:opacity-60"
         >
           QYRON
         </Link>
@@ -72,7 +72,7 @@ export default function Header() {
       {ouvert && (
         <nav
           id="menu-principal"
-          className="border-t border-line/60 bg-void/95 backdrop-blur-xl"
+          className="border-t border-line/70 bg-panel/95 backdrop-blur-xl"
         >
           <ul className="mx-auto max-w-[100rem] px-5 py-4 sm:px-8">
             {LIENS.map((lien) => {
@@ -82,8 +82,8 @@ export default function Header() {
                   <Link
                     href={lien.href}
                     aria-current={actif ? "page" : undefined}
-                    className={`display flex min-h-14 items-center text-3xl transition-colors duration-200 hover:text-heat sm:text-4xl ${
-                      actif ? "text-heat" : ""
+                    className={`display flex min-h-14 items-center text-2xl transition-opacity duration-200 hover:opacity-60 sm:text-3xl ${
+                      actif ? "" : "text-dim"
                     }`}
                   >
                     {lien.libelle}

@@ -56,7 +56,7 @@ export default function Catalogue({ produits }: { produits: Produit[] }) {
             onChange={(e) => setRecherche(e.target.value)}
             placeholder={t.rechercherPlaceholder}
             autoComplete="off"
-            className="h-14 w-full rounded-full border border-line bg-panel/60 pl-12 pr-12 text-base placeholder:text-dim focus:border-heat focus:outline-none"
+            className="carte h-14 w-full rounded-full border border-line bg-panel pl-12 pr-12 text-base placeholder:text-dim focus:border-ink focus:outline-none"
           />
 
           {recherche && (
@@ -93,7 +93,7 @@ export default function Catalogue({ produits }: { produits: Produit[] }) {
       {resultats.length === 0 ? (
         <p className="tag py-24 text-center text-dim">{t.aucunResultat}</p>
       ) : (
-        <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4">
           {resultats.map((produit) => (
             <ProductCard key={produit.id} produit={produit} />
           ))}

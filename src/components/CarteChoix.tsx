@@ -21,7 +21,7 @@ export default function CarteChoix({
   return (
     <Link
       href={href}
-      className="group flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-line bg-panel/60"
+      className="carte group flex min-h-0 flex-1 flex-col overflow-hidden rounded-3xl bg-panel transition-transform duration-300 ease-out hover:-translate-y-1"
     >
       <div className="relative min-h-0 flex-1 bg-tile">
         <Image
@@ -34,14 +34,25 @@ export default function CarteChoix({
         />
       </div>
 
-      <div className="shrink-0 p-4 sm:p-6">
-        <h2 className="display text-[clamp(1.5rem,5vw,2.5rem)]">{titre}</h2>
-        <p className="mt-1.5 text-sm text-dim sm:text-base">{sous}</p>
+      <div className="shrink-0 p-5 sm:p-7">
+        <h2 className="display text-[clamp(1.5rem,4.5vw,2.25rem)]">{titre}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-dim sm:text-base">{sous}</p>
 
-        <span className="tag mt-4 inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-void transition-colors duration-200 group-hover:bg-heat group-hover:text-ink">
+        {/* Pastille blanche a ombre douce, comme sur la reference. */}
+        <span className="carte mt-5 inline-flex min-h-11 items-center gap-3 rounded-full bg-panel px-5 text-sm transition-colors duration-200 group-hover:bg-ink group-hover:text-panel">
           {bouton}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M5 12h14M13 6l6 6-6 6" />
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17 17 7M9 7h8v8" />
           </svg>
         </span>
       </div>

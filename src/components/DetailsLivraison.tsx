@@ -9,8 +9,8 @@ export default function DetailsLivraison({ frais }: { frais: FraisLivraison[] })
   if (frais.length === 0) return null;
 
   return (
-    <details className="mt-10 overflow-hidden rounded-sm border border-line">
-      <summary className="tag flex min-h-14 cursor-pointer items-center justify-between gap-4 px-4 py-4 transition-colors duration-200 hover:text-heat">
+    <details className="carte mt-10 overflow-hidden rounded-2xl border border-line bg-panel">
+      <summary className="tag flex min-h-14 cursor-pointer items-center justify-between gap-4 px-4 py-4 transition-colors duration-200 hover:opacity-60">
         {t.fraisLivraison}
         <svg
           width="18"

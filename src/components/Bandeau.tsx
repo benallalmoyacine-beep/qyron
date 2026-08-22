@@ -7,7 +7,7 @@ export default function Bandeau() {
 
   return (
     <div
-      className="overflow-hidden border-y border-line bg-panel/60 py-4 backdrop-blur-sm"
+      className="overflow-hidden border-y border-line bg-panel/70 py-4 backdrop-blur-sm"
       role="presentation"
       aria-hidden="true"
     >
@@ -18,7 +18,7 @@ export default function Bandeau() {
             {mots.map((mot) => (
               <li key={mot} className="tag flex items-center gap-10 text-dim">
                 {mot}
-                <span className="h-1 w-1 rounded-full bg-heat" />
+                <span className="h-1 w-1 rounded-full bg-dim" />
               </li>
             ))}
           </ul>

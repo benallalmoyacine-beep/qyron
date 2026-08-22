@@ -19,7 +19,7 @@ export default function Statut({
     <span
       className={
         compact
-          ? "tag inline-flex items-center gap-1.5 rounded-full bg-void/85 px-2 py-1"
+          ? "tag inline-flex items-center gap-1.5 rounded-full bg-panel/90 px-2.5 py-1 text-ink"
           : "inline-flex items-center gap-2"
       }
     >

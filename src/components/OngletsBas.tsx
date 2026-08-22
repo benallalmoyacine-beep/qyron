@@ -77,12 +77,12 @@ export default function OngletsBas() {
           className="fixed inset-x-0 bottom-[4.5rem] z-40 px-4 pb-2"
           id="panneau-reseaux"
         >
-          <div className="mx-auto flex max-w-md flex-col gap-2 rounded-2xl border border-line bg-panel/95 p-2 backdrop-blur-xl">
+          <div className="carte mx-auto flex max-w-md flex-col gap-2 rounded-2xl border border-line bg-panel/95 p-2 backdrop-blur-xl">
             <a
               href={INSTAGRAM}
               target="_blank"
               rel="noopener noreferrer"
-              className="tag flex min-h-14 items-center gap-3 rounded-xl px-4 transition-colors duration-200 hover:text-heat"
+              className="tag flex min-h-14 items-center gap-3 rounded-xl px-4 transition-colors duration-200 hover:opacity-60"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16Zm0 5.17a4.67 4.67 0 1 0 0 9.34 4.67 4.67 0 0 0 0-9.34Zm0 7.7a3.03 3.03 0 1 1 0-6.06 3.03 3.03 0 0 1 0 6.06Zm5.95-7.88a1.09 1.09 0 1 1-2.18 0 1.09 1.09 0 0 1 2.18 0Z" />
@@ -93,7 +93,7 @@ export default function OngletsBas() {
               href={TIKTOK}
               target="_blank"
               rel="noopener noreferrer"
-              className="tag flex min-h-14 items-center gap-3 rounded-xl px-4 transition-colors duration-200 hover:text-heat"
+              className="tag flex min-h-14 items-center gap-3 rounded-xl px-4 transition-colors duration-200 hover:opacity-60"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .77-5.06v-3.1a5.66 5.66 0 0 0-.77-.05A5.66 5.66 0 1 0 15.54 15.4V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.24-1.48Z" />
@@ -106,7 +106,7 @@ export default function OngletsBas() {
 
       <nav
         aria-label={t.accueil}
-        className="fixed inset-x-0 bottom-0 z-40 border-t border-line/60 bg-void/85 backdrop-blur-xl"
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-line/70 bg-panel/85 backdrop-blur-xl"
       >
         <ul className="mx-auto flex max-w-[100rem] items-stretch">
           {onglets.map(({ href, libelle, Icone }) => {
@@ -117,7 +117,7 @@ export default function OngletsBas() {
                   href={href}
                   aria-current={actif ? "page" : undefined}
                   className={`flex min-h-16 flex-col items-center justify-center gap-1 pb-[env(safe-area-inset-bottom)] transition-colors duration-200 ${
-                    actif ? "text-heat" : "text-dim hover:text-ink"
+                    actif ? "text-ink" : "text-dim hover:text-ink"
                   }`}
                 >
                   <Icone />
@@ -135,7 +135,7 @@ export default function OngletsBas() {
               aria-expanded={reseaux}
               aria-controls="panneau-reseaux"
               className={`flex min-h-16 w-full flex-col items-center justify-center gap-1 pb-[env(safe-area-inset-bottom)] transition-colors duration-200 ${
-                reseaux ? "text-heat" : "text-dim hover:text-ink"
+                reseaux ? "text-ink" : "text-dim hover:text-ink"
               }`}
             >
               <IconeReseaux />

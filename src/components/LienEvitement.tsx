@@ -5,7 +5,7 @@ import { useT } from "@/lib/langue";
 export default function LienEvitement() {
   const t = useT();
   return (
-    <a href="#contenu" className="tag evitement bg-heat px-4 py-3 text-void">
+    <a href="#contenu" className="tag evitement rounded-full bg-ink px-4 py-3 text-panel">
       {t.allerAuContenu}
     </a>
   );

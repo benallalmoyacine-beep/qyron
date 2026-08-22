@@ -16,7 +16,7 @@ function Message({ children }: { children: React.ReactNode }) {
 function Compteur({ valeur, libelle }: { valeur: string; libelle: string }) {
   return (
     <div className="monte">
-      <p className="chiffres display text-[clamp(3rem,10vw,6rem)] text-heat">{valeur}</p>
+      <p className="chiffres display text-[clamp(2.5rem,7vw,4rem)]">{valeur}</p>
       <p className="tag mt-2 text-dim">{libelle}</p>
     </div>
   );
@@ -38,41 +38,47 @@ export default function VueBoutique({
 
   return (
     <>
-      <section className="mx-auto max-w-[100rem] px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40">
-        <p className="tag flex items-center gap-3 text-heat">
-          <span className="h-px w-10 bg-heat" aria-hidden="true" />
-          {t.impression3d}
-        </p>
-        <h1 className="display mt-6 text-[clamp(3rem,13vw,11rem)]">{t.catalogue}</h1>
+      <section className="mx-auto max-w-[90rem] px-5 pb-14 pt-28 sm:px-8 sm:pb-16 sm:pt-36">
+        <p className="tag text-dim">{t.impression3d}</p>
+
+        {/* Titre a deux tons : la seconde ligne en gris, comme sur la
+            reference. Le contraste de ton porte la hierarchie. */}
+        <h1 className="display mt-5 text-[clamp(2.75rem,8vw,6rem)]">
+          {t.catalogue}
+          <br />
+          <span className="evide">{t.signature3}</span>
+        </h1>
       </section>
 
       <Bandeau />
 
-      <section className="mx-auto max-w-[100rem] px-5 py-16 sm:px-8 sm:py-24">
+      <section className="mx-auto max-w-[90rem] px-5 py-16 sm:px-8 sm:py-20">
         <Catalogue produits={produits} />
       </section>
 
-      <section className="relative overflow-hidden border-t border-line bg-panel/70">
-        <div className="mx-auto max-w-[100rem] px-5 py-24 sm:px-8 sm:py-32">
-          <p className="monte display text-[clamp(2.5rem,11vw,9rem)]">
+      {/* Bandeau large arrondi, avec les chiffres de la boutique. */}
+      <section className="mx-auto max-w-[90rem] px-5 pb-24 sm:px-8">
+        <div className="carte rounded-3xl bg-panel px-6 py-14 sm:px-12 sm:py-20">
+          <p className="monte display text-[clamp(1.75rem,5vw,3.25rem)]">
             {t.signature1}
             <br />
             <span className="evide">{t.signature2}</span>
-            <br />
-            {t.signature3}
           </p>
 
-          <div className="mt-20 grid gap-12 border-t border-line pt-12 sm:grid-cols-3">
-            <Compteur valeur={String(produits.length).padStart(2, "0")} libelle={t.piecesCatalogue} />
+          <div className="mt-14 grid gap-10 border-t border-line pt-10 sm:grid-cols-3">
+            <Compteur
+              valeur={String(produits.length).padStart(2, "0")}
+              libelle={t.piecesCatalogue}
+            />
             <Compteur valeur={String(nbWilayas).padStart(2, "0")} libelle={t.wilayasLivrees} />
             <div className="monte">
-              <p className="display text-[clamp(2rem,6vw,3.5rem)] text-heat">{t.aLaLivraison}</p>
+              <p className="display text-[clamp(1.5rem,4vw,2.25rem)]">{t.aLaLivraison}</p>
               <p className="tag mt-2 text-dim">{t.paiement}</p>
             </div>
           </div>
-
-          <p className="tag mt-20 text-dim">{t.marque}</p>
         </div>
+
+        <p className="tag mt-10 text-center text-dim">{t.marque}</p>
       </section>
     </>
   );

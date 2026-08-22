@@ -7,12 +7,9 @@ export default function VueAPropos({ blocs }: { blocs: Bloc[] }) {
   const t = useT();
 
   return (
-    <article className="mx-auto max-w-[100rem] px-5 pb-32 pt-32 sm:px-8 sm:pt-40">
-      <p className="tag flex items-center gap-3 text-heat">
-        <span className="h-px w-10 bg-heat" aria-hidden="true" />
-        QYRON
-      </p>
-      <h1 className="display mt-6 text-[clamp(3rem,13vw,11rem)]">{t.aPropos}</h1>
+    <article className="mx-auto max-w-[90rem] px-5 pb-28 pt-28 sm:px-8 sm:pt-36">
+      <p className="tag text-dim">QYRON</p>
+      <h1 className="display mt-5 text-[clamp(2.5rem,7vw,5rem)]">{t.aPropos}</h1>
 
       {blocs.length === 0 ? (
         <p className="mt-16 max-w-2xl text-dim">
@@ -26,7 +23,7 @@ export default function VueAPropos({ blocs }: { blocs: Bloc[] }) {
               className="monte grid gap-4 md:grid-cols-[1fr_2fr] md:gap-12"
             >
               {bloc.titre && <h2 className="display text-2xl sm:text-3xl">{bloc.titre}</h2>}
-              <p className="max-w-2xl whitespace-pre-line text-dim">{bloc.texte}</p>
+              <p className="max-w-prose whitespace-pre-line leading-relaxed text-dim">{bloc.texte}</p>
             </section>
           ))}
         </div>

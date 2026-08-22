@@ -7,14 +7,11 @@ export default function VuePersonnalise({ instagram }: { instagram: string }) {
   const t = useT();
 
   return (
-    <div className="mx-auto max-w-[100rem] px-5 pb-32 pt-32 sm:px-8 sm:pt-40">
-      <p className="tag flex items-center gap-3 text-heat">
-        <span className="h-px w-10 bg-heat" aria-hidden="true" />
-        QYRON
-      </p>
+    <div className="mx-auto max-w-[90rem] px-5 pb-28 pt-28 sm:px-8 sm:pt-36">
+      <p className="tag text-dim">QYRON</p>
 
-      <h1 className="display mt-6 text-[clamp(2.5rem,11vw,8rem)]">{t.persoTitre}</h1>
-      <p className="mt-4 max-w-xl text-dim">{t.persoSous}</p>
+      <h1 className="display mt-5 text-[clamp(2.25rem,6.5vw,4.5rem)]">{t.persoTitre}</h1>
+      <p className="mt-4 max-w-xl text-lg leading-relaxed text-dim">{t.persoSous}</p>
 
       <FormulairePersonnalise instagram={instagram} />
     </div>

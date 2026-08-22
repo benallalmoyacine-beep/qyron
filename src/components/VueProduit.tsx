@@ -18,10 +18,10 @@ export default function VueProduit({
   const t = useT();
 
   return (
-    <article className="mx-auto max-w-[100rem] px-5 pb-32 pt-24 sm:px-8">
+    <article className="mx-auto max-w-[90rem] px-5 pb-28 pt-24 sm:px-8">
       <Link
         href="/boutique"
-        className="tag inline-flex min-h-11 items-center gap-2 text-dim transition-colors duration-200 hover:text-heat"
+        className="tag inline-flex min-h-11 items-center gap-2 text-dim transition-colors duration-200 hover:opacity-60"
       >
         <svg
           width="14"
@@ -39,12 +39,12 @@ export default function VueProduit({
         {t.retourCatalogue}
       </Link>
 
-      <h1 className="display mt-6 text-[clamp(3rem,13vw,11rem)]">{produit.nom}</h1>
+      <h1 className="display mt-6 text-[clamp(2.5rem,7vw,5rem)]">{produit.nom}</h1>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
         <div className="space-y-4">
           {produit.photos.map((photo, i) => (
-            <div key={photo} className="relative aspect-[4/5] overflow-hidden rounded-sm bg-tile">
+            <div key={photo} className="relative aspect-square overflow-hidden rounded-3xl bg-tile">
               <Image
                 src={photo}
                 alt={
@@ -62,12 +62,12 @@ export default function VueProduit({
         </div>
 
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <p className="chiffres display text-[clamp(2.5rem,8vw,4.5rem)] text-heat">
+          <p className="chiffres display text-[clamp(2rem,5vw,3rem)]">
             {formatPrix(produit.prix)}
           </p>
 
           {produit.description && (
-            <p className="mt-6 whitespace-pre-line text-dim">{produit.description}</p>
+            <p className="mt-6 max-w-prose whitespace-pre-line leading-relaxed text-dim">{produit.description}</p>
           )}
 
           <dl className="mt-10 border-t border-line">

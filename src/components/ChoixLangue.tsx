@@ -15,7 +15,7 @@ export default function ChoixLangue() {
       aria-labelledby="titre-langue"
       className="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-10 bg-void px-6"
     >
-      <p className="display text-3xl tracking-[0.18em]">QYRON</p>
+      <p className="display text-2xl tracking-[0.06em]">QYRON</p>
 
       <h1 id="titre-langue" className="tag text-center text-dim">
         {TEXTES.fr.choisirLangue} / {TEXTES.en.choisirLangue}
@@ -25,14 +25,14 @@ export default function ChoixLangue() {
         <button
           type="button"
           onClick={() => choisir("fr")}
-          className="display flex min-h-16 flex-1 items-center justify-center rounded-full border border-line text-2xl transition-colors duration-200 hover:border-heat hover:text-heat"
+          className="carte display flex min-h-16 flex-1 items-center justify-center rounded-full bg-panel text-xl transition-colors duration-200 hover:bg-ink hover:text-panel"
         >
           {TEXTES.fr.francais}
         </button>
         <button
           type="button"
           onClick={() => choisir("en")}
-          className="display flex min-h-16 flex-1 items-center justify-center rounded-full border border-line text-2xl transition-colors duration-200 hover:border-heat hover:text-heat"
+          className="carte display flex min-h-16 flex-1 items-center justify-center rounded-full bg-panel text-xl transition-colors duration-200 hover:bg-ink hover:text-panel"
         >
           {TEXTES.en.anglais}
         </button>

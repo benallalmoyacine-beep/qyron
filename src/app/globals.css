@@ -1,27 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* Bleu nuit profond, blanc os, orange filament en fusion. */
-  --color-void: #080d1a;
-  --color-panel: #0f1626;
-  --color-tile: #182236;
-  --color-ink: #f1f3f8;
-  --color-dim: #8d97ad;
-  --color-heat: #ff5a1f;
-  --color-glow: #3d6fd4;
-  --color-ok: #3ddc84;
-  --color-ko: #ff3b5c;
-  --color-line: #232f47;
+  /* Gris clair, encre presque noire, aucun accent colore : la hierarchie
+     passe par la taille, le blanc et le contraste, pas par la couleur. */
+  --color-void: #f5f5f7;
+  --color-panel: #ffffff;
+  --color-tile: #ebebef;
+  --color-ink: #1d1d1f;
+  --color-dim: #6e6e73;
+  --color-heat: #1d1d1f;
+  --color-glow: #ffffff;
+  --color-ok: #1a8a4a;
+  --color-ko: #c8102e;
+  --color-line: #d8d8dd;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-anton), "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   background: var(--color-void);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  line-height: 1.55;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -34,11 +35,11 @@ summary {
 }
 
 /* Anneau de focus visible au clavier : le contour par defaut du navigateur
-   disparait sur fond noir. */
+   est trop discret sur un fond clair uniforme. */
 :focus-visible {
-  outline: 2px solid var(--color-heat);
+  outline: 2px solid var(--color-ink);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 /* Lien d'evitement : masque jusqu'a ce qu'il recoive le focus clavier. */
@@ -55,18 +56,20 @@ summary {
   transform: translateY(0);
 }
 
+/* Titres : casse normale, graisse moyenne, interlettrage resserre.
+   C'est le resserrement qui donne le calme, pas la graisse. */
 .display {
   font-family: var(--font-display);
-  font-weight: 400;
-  text-transform: uppercase;
-  line-height: 0.85;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
 }
 
-/* 12 px minimum : en dessous, des capitales espacees deviennent penibles. */
+/* Petites capitales de navigation. */
 .tag {
   font-size: 0.75rem;
-  letter-spacing: 0.16em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   line-height: 1.4;
 }
@@ -75,25 +78,21 @@ summary {
   font-variant-numeric: tabular-nums;
 }
 
-/* Lettres evidees : le contour reste clair, le mot doit rester lisible. */
+/* Seconde ligne de titre, en gris : le contraste de ton remplace
+   le contraste de taille. */
 .evide {
-  color: transparent;
-  -webkit-text-stroke: 2px var(--color-ink);
+  color: var(--color-dim);
 }
 
-/* Grain fin sur toute la page : donne de la matiere au noir. */
-.grain::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  opacity: 0.045;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Ombre douce des cartes, unique echelle pour tout le site. */
+.carte {
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.04),
+    0 8px 24px rgb(0 0 0 / 0.06);
 }
 
-/* Decor de fond : derive lente des carres flous, scintillement des eclats.
-   Uniquement transform et opacity, pour rester sur le compositeur. */
+/* Decor de fond : grandes formes arrondies blanches en derive lente.
+   Uniquement translate, pour rester sur le compositeur. */
 @keyframes derive {
   0%,
   100% {
@@ -110,24 +109,6 @@ summary {
 .derive {
   animation: derive linear infinite;
   will-change: translate;
-}
-
-@keyframes scintille {
-  0%,
-  100% {
-    opacity: 0.08;
-    scale: 1;
-  }
-  50% {
-    opacity: 0.85;
-    scale: 1.6;
-  }
-}
-
-/* L'opacite de base sert de rendu fixe quand les animations sont coupees. */
-.scintille {
-  opacity: 0.35;
-  animation: scintille ease-in-out infinite;
 }
 
 /* Bandeau defilant. */
@@ -147,7 +128,7 @@ summary {
   @keyframes monte {
     from {
       opacity: 0;
-      transform: translateY(2.5rem);
+      transform: translateY(2rem);
     }
   }
 
