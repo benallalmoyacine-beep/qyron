@@ -137,21 +137,73 @@ summary {
   backface-visibility: hidden;
 }
 
-/* Trois teintes pour trois orientations : c'est l'ecart de valeur qui fait
-   lire le volume, pas la perspective seule. */
+/* Six faces, pas trois : un cube a trois faces laisse voir le fond noir
+   des qu'il tourne. backface-visibility masque celles qui pointent vers
+   l'arriere, donc trois seulement s'affichent a la fois.
+
+   L'ecart de valeur entre dessus, cotes et faces avant/arriere est ce qui
+   fait lire le volume ; la perspective seule n'y suffit pas. */
 .cube .dessus {
-  background: #ffffff;
   transform: rotateX(90deg) translateZ(var(--demi));
 }
 
+.cube .dessous {
+  transform: rotateX(-90deg) translateZ(var(--demi));
+}
+
 .cube .avant {
-  background: #e0e0e0;
   transform: translateZ(var(--demi));
 }
 
-.cube .cote {
-  background: #b8b8b8;
+.cube .arriere {
+  transform: rotateY(180deg) translateZ(var(--demi));
+}
+
+.cube .droite {
   transform: rotateY(90deg) translateZ(var(--demi));
+}
+
+.cube .gauche {
+  transform: rotateY(-90deg) translateZ(var(--demi));
+}
+
+/* Cubes blancs. */
+.cube.blanc .dessus {
+  background: #ffffff;
+}
+
+.cube.blanc .dessous {
+  background: #9a9a9a;
+}
+
+.cube.blanc .avant,
+.cube.blanc .arriere {
+  background: #e0e0e0;
+}
+
+.cube.blanc .droite,
+.cube.blanc .gauche {
+  background: #b8b8b8;
+}
+
+/* Cubes rouges : teintes plus vives, sans quoi le rouge disparait
+   completement une fois l'opacite appliquee sur du noir. */
+.cube.rouge .dessus {
+  background: #ff6b6b;
+}
+
+.cube.rouge .dessous {
+  background: #8f1d27;
+}
+
+.cube.rouge .avant,
+.cube.rouge .arriere {
+  background: #e63946;
+}
+
+.cube.rouge .droite,
+.cube.rouge .gauche {
+  background: #b3232f;
 }
 
 /* Bandeau defilant. */
