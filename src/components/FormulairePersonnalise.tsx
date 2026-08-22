@@ -76,11 +76,21 @@ export default function FormulairePersonnalise({ instagram }: { instagram: strin
 
     try {
       const res = await fetch("/api/demande", { method: "POST", body: corps });
-      if (!res.ok) throw new Error(String(res.status));
-      setEtat("envoye");
+      if (res.ok) {
+        setEtat("envoye");
+        return;
+      }
+
+      // Le code technique accompagne le message : il dit laquelle des deux
+      // dependances externes a lache, sans quoi la panne est indevinable.
+      const corpsErreur = await res.json().catch(() => null);
+      const code = corpsErreur?.erreur ?? String(res.status);
+      const precision = corpsErreur?.detail ? ` — ${corpsErreur.detail}` : "";
+      setErreur(`${t.erreurEnvoi} [${code}${precision}]`);
+      setEtat("saisie");
     } catch {
-      // La photo et les champs restent en place : rien à ressaisir.
-      setErreur(t.erreurEnvoi);
+      // La photo et les champs restent en place : rien a ressaisir.
+      setErreur(`${t.erreurEnvoi} [reseau]`);
       setEtat("saisie");
     }
   }

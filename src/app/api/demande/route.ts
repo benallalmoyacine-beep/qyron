@@ -24,6 +24,12 @@ function segmentFichier(valeur: string) {
   );
 }
 
+/** Message court et sans secret, utile pour situer la panne. */
+function detail(erreur: unknown) {
+  const brut = erreur instanceof Error ? erreur.message : String(erreur);
+  return brut.replace(/pat[A-Za-z0-9._-]+/g, "***").slice(0, 200);
+}
+
 export async function POST(request: Request) {
   let form: FormData;
   try {
@@ -49,25 +55,38 @@ export async function POST(request: Request) {
     return NextResponse.json({ erreur: "trop-lourd" }, { status: 413 });
   }
 
+  // Étape 1 : dépôt du fichier. Séparée du reste pour que le message dise
+  // laquelle des deux dépendances externes a lâché.
+  let lien: string;
   try {
-    // Stockage privé : le fichier n'est jamais lisible depuis son URL brute.
     const blob = await put(
       `demandes/${segmentFichier(prenom)}-${segmentFichier(nom)}.jpg`,
       photo,
       { access: "private", addRandomSuffix: true, contentType: "image/jpeg" },
     );
 
-    // Airtable reçoit un lien vers notre route de lecture, seule capable de
-    // servir le fichier. La clé se change pour révoquer tous les liens.
     const base = process.env.SITE_URL ?? new URL(request.url).origin;
     const cle = process.env.PHOTO_ACCESS_KEY ?? "";
-    const lien = `${base}/api/photo?p=${encodeURIComponent(blob.pathname)}&k=${encodeURIComponent(cle)}`;
-
-    await createDemande({ prenom, nom, urlPhoto: lien });
-
-    return NextResponse.json({ ok: true });
+    lien = `${base}/api/photo?p=${encodeURIComponent(blob.pathname)}&k=${encodeURIComponent(cle)}`;
   } catch (erreur) {
-    console.error("Demande personnalisée : échec", erreur);
-    return NextResponse.json({ erreur: "envoi-echoue" }, { status: 502 });
+    console.error("Demande personnalisée : dépôt du fichier impossible", erreur);
+    return NextResponse.json(
+      { erreur: "stockage", detail: detail(erreur) },
+      { status: 502 },
+    );
   }
+
+  // Étape 2 : la ligne Airtable. Le fichier est déjà déposé ; en cas d'échec
+  // ici, il reste dans le stockage sans ligne associée.
+  try {
+    await createDemande({ prenom, nom, urlPhoto: lien });
+  } catch (erreur) {
+    console.error("Demande personnalisée : écriture Airtable impossible", erreur);
+    return NextResponse.json(
+      { erreur: "airtable", detail: detail(erreur) },
+      { status: 502 },
+    );
+  }
+
+  return NextResponse.json({ ok: true });
 }
