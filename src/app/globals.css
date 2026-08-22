@@ -119,7 +119,9 @@ summary {
 .cube-flotte {
   position: absolute;
   animation: flotter ease-in-out infinite;
-  will-change: transform;
+  /* transform porte le flottement, translate porte l'inclinaison du
+     telephone : deux proprietes distinctes qui se composent. */
+  will-change: transform, translate;
 }
 
 .cube {
