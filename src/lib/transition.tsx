@@ -25,8 +25,9 @@ type Contexte = {
 
 const TransitionContext = createContext<Contexte | null>(null);
 
-const DUREE = 420;
-const COURBE = "cubic-bezier(0.22, 0.61, 0.36, 1)";
+const DUREE = 260;
+// Depart franc, arrivee amortie : le mouvement parait plus vif a duree egale.
+const COURBE = "cubic-bezier(0.16, 0.84, 0.36, 1)";
 
 /** Nombre d'images d'attente avant d'abandonner la recherche de la cible. */
 const PATIENCE = 40;

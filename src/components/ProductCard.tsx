@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import type { Produit } from "@/lib/airtable";
 import { formatPrix } from "@/lib/format";
@@ -12,9 +13,20 @@ import { useTransition } from "@/lib/transition";
 export default function ProductCard({ produit }: { produit: Produit }) {
   const t = useT();
   const transition = useTransition();
+  const router = useRouter();
   const cadre = useRef<HTMLDivElement>(null);
+  const prechargee = useRef(false);
 
   const href = `/produit/${produit.id}`;
+
+  // La fiche produit est rendue a la demande : sans ce prechargement, l'image
+  // reste figee le temps de l'aller-retour serveur avant de pouvoir s'envoler.
+  // Au survol sur ordinateur, des le contact du doigt sur mobile.
+  function precharger() {
+    if (prechargee.current) return;
+    prechargee.current = true;
+    router.prefetch(href);
+  }
 
   function surClic(e: React.MouseEvent<HTMLAnchorElement>) {
     // Clic milieu, Ctrl/Cmd, nouvel onglet : on laisse le navigateur faire.
@@ -28,7 +40,13 @@ export default function ProductCard({ produit }: { produit: Produit }) {
   }
 
   return (
-    <Link href={href} onClick={surClic} className="monte group block">
+    <Link
+      href={href}
+      onClick={surClic}
+      onPointerEnter={precharger}
+      onTouchStart={precharger}
+      className="monte group block"
+    >
       {/* Le produit est pose sur une tuile claire, nom et prix centres en
           dessous : c'est la disposition des references fournies. */}
       <div
